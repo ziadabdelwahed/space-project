@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Singularity Drift: 2049</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- واجهة المستخدم للعرض المعلوماتي -->
+    <div id="info-panel">
+        <h2 id="object-name">استهدف جرمًا</h2>
+        <p id="object-desc">حرك الكاميرا وانقر على كوكب أو الثقب الأسود.</p>
+    </div>
+    
+    <!-- حاوية المشهد -->
+    <div id="canvas-container"></div>
+
+    <!-- المكتبات الأساسية -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.128.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.128.0/examples/jsm/"
+            }
+        }
+    </script>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
