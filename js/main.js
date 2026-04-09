@@ -73,7 +73,7 @@ const planets = createSolarSystem(scene);
 // 🔥 اختبار
 console.log("PLANETS:", planets);
 
-setupRaycaster(camera, renderer.domElement, [...planets, blackHoleGroup], (name, desc) => {
+setupRaycaster(camera, renderer.domElement, [...(planets || []), blackHoleGroup], (name, desc) => {
     document.getElementById('object-name').textContent = name;
     document.getElementById('object-desc').textContent = desc;
 });
