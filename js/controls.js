@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+import * as THREE from 'https://unpkg.com/three@0.128.0/build/three.module.js';
 
 export function setupRaycaster(camera, domElement, objects, updateUICallback) {
     const raycaster = new THREE.Raycaster();
