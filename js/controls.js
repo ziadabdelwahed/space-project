@@ -22,8 +22,8 @@ export function setupRaycaster(camera, domElement, objects, updateUICallback) {
 
     function onClick(event) {
         // حساب إحداثيات الماوس المعيارية
-        mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1;
-        mouse.y = -(event.clientY / renderer.domElement.clientHeight) * 2 + 1;
+     mouse.x = (event.clientX / domElement.clientWidth) * 2 - 1;
+mouse.y = -(event.clientY / domElement.clientHeight) * 2 + 1;
         
         raycaster.setFromCamera(mouse, camera);
         
