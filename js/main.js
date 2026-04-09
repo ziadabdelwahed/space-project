@@ -14,7 +14,7 @@ scene.background = new THREE.Color(0x050510); // أسود فحمي مزرق
 const light = new THREE.AmbientLight(0xffffff, 1.5);
 scene.add(light);
 const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.set(0, 20, 40);
+camera.position.set(0, 10, 25);
 camera.lookAt(0, 0, 0);
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
