@@ -6,8 +6,9 @@ export function setupRaycaster(camera, domElement, objects, updateUICallback) {
     
     const clickableObjects = [];
 
+    // 🔥 تجميع العناصر بشكل آمن
     objects.forEach(obj => {
-        if (!obj) return; // 🔥 أهم سطر
+        if (!obj) return;
 
         if (obj.isMesh) {
             clickableObjects.push(obj);
@@ -40,15 +41,20 @@ export function setupRaycaster(camera, domElement, objects, updateUICallback) {
             let hit = intersects[0].object;
             let foundInfo = null;
             
+            // 🔥 البحث الآمن عن info
             while (hit && !foundInfo) {
                 if (hit.userData && hit.userData.info) {
                     foundInfo = hit.userData.info;
-                } else {
-                    hit = hit.parent;
+                    break;
                 }
+
+                if (!hit.parent) break;
+
+                hit = hit.parent;
             }
             
-            if (foundInfo) {
+            // 🔥 عرض النتيجة بأمان
+            if (foundInfo && foundInfo.name && foundInfo.desc) {
                 updateUICallback(foundInfo.name, foundInfo.desc);
             } else {
                 updateUICallback('فضاء سحيق', 'لا توجد بيانات محددة لهذه النقطة.');
@@ -59,4 +65,4 @@ export function setupRaycaster(camera, domElement, objects, updateUICallback) {
     }
     
     domElement.addEventListener('click', onClick);
-                                 }
+        }
