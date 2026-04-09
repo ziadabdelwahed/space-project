@@ -17,11 +17,17 @@ import { setupRaycaster } from './controls.js';
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x050510);
 
-const light = new THREE.AmbientLight(0xffffff, 1.5);
+// 🔥 إضاءة أقوى
+const light = new THREE.AmbientLight(0xffffff, 2);
 scene.add(light);
 
+const strongLight = new THREE.PointLight(0xffffff, 3);
+strongLight.position.set(0, 0, 0);
+scene.add(strongLight);
+
+// 🔥 كاميرا أقرب
 const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.set(0, 10, 25);
+camera.position.set(0, 5, 15);
 camera.lookAt(0, 0, 0);
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
@@ -29,7 +35,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.domElement.style.display = "block";
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.toneMapping = THREE.ReinhardToneMapping;
-renderer.toneMappingExposure = 1.2;
+renderer.toneMappingExposure = 1.5;
 
 document.getElementById('canvas-container').appendChild(renderer.domElement);
 
@@ -38,13 +44,13 @@ const renderScene = new RenderPass(scene, camera);
 
 const bloomPass = new UnrealBloomPass(
     new THREE.Vector2(window.innerWidth, window.innerHeight),
-    1.5,
+    1.2, // خففناها شوية
     0.4,
     0.85
 );
 
 bloomPass.threshold = 0.1;
-bloomPass.strength = 1.2;
+bloomPass.strength = 0.8; // مهم عشان ميبيضش الشاشة
 bloomPass.radius = 0.5;
 
 const composer = new EffectComposer(renderer);
@@ -55,18 +61,17 @@ composer.addPass(bloomPass);
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.05;
-controls.autoRotate = true;
-controls.autoRotateSpeed = 0.5;
+controls.autoRotate = false; // 🔥 وقفنا الدوران مؤقتًا
 controls.enableZoom = true;
 controls.enablePan = true;
-controls.maxPolarAngle = Math.PI;
-controls.minDistance = 5;
-controls.maxDistance = 120;
 
 // --- Scene Objects ---
 createGalaxyBackground(scene);
 const blackHoleGroup = createBlackHole(scene);
 const planets = createSolarSystem(scene);
+
+// 🔥 اختبار
+console.log("PLANETS:", planets);
 
 setupRaycaster(camera, renderer.domElement, [...planets, blackHoleGroup], (name, desc) => {
     document.getElementById('object-name').textContent = name;
